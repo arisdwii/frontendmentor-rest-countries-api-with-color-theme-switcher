@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rest Countries API with Color Theme Switcher</title>
+
+    <link href="../dist/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200..1000&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="w-full bg-[var(--color-element)] text-[var(--color-text)] py-4 shadow-sm">
+        <div class="container flex items-center justify-between">
+            <h1 class="text-lg font-bold">
+                <a href="/">Where is the world?</a>
+            </h1>
+
+            <button type="button"
+                class="color-mode flex items-center gap-1 px-3 py-2 text-sm font-semibold hover:bg-[var(--color-input)]/10 active:bg-[var(--color-input)]/10 cursor-pointer duration-200 rounded-sm select-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" aria-hidden="true" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2h.1A6.98 6.98 0 0 0 10 7m-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938A8 8 0 0 0 4 12" />
+                </svg>
+                Dark Mode
+            </button>
+        </div>
+    </header>
+
+    <main class="container mt-6 md:grid md:grid-cols-4">
+        <!-- Search -->
+        <section aria-labelledby="search-heading" class="select-none md:col-span-2 md:max-w-sm">
+            <form
+                class="relative flex items-center text-[var(--color-text)] gap-4 px-5 rounded-sm shadow-sm bg-[var(--color-element)]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-[24px] h-[24px] md:w-5 md:h-5" aria-hidden="true"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="1.5" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314" />
+                </svg>
+
+                <input id="search" type="text" class="w-full text-sm outline-none py-3.5"
+                    placeholder="Search for a country...">
+            </form>
+        </section>
+
+        <!-- Filter -->
+        <section aria-labelledby="filter-heading" class="relative mt-5 select-none md:col-span-2 md:mt-0 md:self-start">
+            <details class="relative group md:justify-self-end">
+                <summary
+                    class="bg-[var(--color-element)] shadow-sm flex items-center justify-between py-3 px-5 rounded-sm font-semibold text-sm w-[200px] cursor-pointer hover:bg-[var(--color-input)]/10 duration-200 md:py-3.5">
+                    Filter by Region
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-[18px] h-[18px] group-open:rotate-180 transition-transform duration-150"
+                        aria-hidden="true" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2.5" d="m17 14l-5-5m0 0l-5 5" />
+                    </svg>
+                </summary>
+
+                <ul
+                    class="absolute top-full left-0 mt-2 w-[200px] bg-[var(--color-element)] z-10 shadow-sm flex flex-col text-sm font-semibold">
+                    <li>
+                        <button data-index="all"
+                            class="px-5 py-2 text-left bg-[var(--color-input)]/10 hover:bg-[var(--color-input)]/10 duration-200 w-full cursor-pointer">All</button>
+                    </li>
+                    <li>
+                        <button data-index="africa"
+                            class="px-5 py-2 text-left hover:bg-[var(--color-input)]/10 duration-200 w-full cursor-pointer">Africa</button>
+                    </li>
+                    <li>
+                        <button data-index="americas"
+                            class="px-5 py-2 text-left hover:bg-[var(--color-input)]/10 duration-200 w-full cursor-pointer">America</button>
+                    </li>
+                    <li>
+                        <button data-index="asia"
+                            class="px-5 py-2 text-left hover:bg-[var(--color-input)]/10 duration-200 w-full cursor-pointer">Asia</button>
+                    </li>
+                    <li>
+                        <button data-index="europe"
+                            class="px-5 py-2 text-left hover:bg-[var(--color-input)]/10 duration-200 w-full cursor-pointer">Europe</button>
+                    </li>
+                    <li>
+                        <button data-index="oceania"
+                            class="px-5 py-2 text-left hover:bg-[var(--color-input)]/10 duration-200 w-full cursor-pointer">Oceania</button>
+                    </li>
+                </ul>
+            </details>
+        </section>
+
+        <!-- Countries List -->
+        <section aria-labelledby="countries-heading" class="mt-8 md:col-span-4">
+            <ul class="grid gap-10 countries-list sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></ul>
+        </section>
+    </main>
+
+    <footer class="container mt-20 mb-5">
+        <p class="text-center lg:text-sm">
+            Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+                class="underline">Frontend Mentor</a>.
+            Coded by <a href="https://github.com/arisdwii" class="underline">arisdwii</a>.
+        </p>
+    </footer>
+
+    <script src="src/js/colorMode.js"></script>
+    <script src="src/js/listCountries.js"></script>
+</body>
+
+</html>
